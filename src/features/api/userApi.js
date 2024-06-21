@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setError } from "../slice/userSlice";
 
 const userApi = createApi({
   reducerPath: "userApi",
@@ -9,6 +10,14 @@ const userApi = createApi({
   tagTypes: ["User"],
 
   endpoints: (builder) => ({
+    getUser: builder.query({
+      query: () => ({
+        url: "/users/getUser",
+      }),
+      providesTags: ["User"],
+      keepUnusedDataFor: 30000,
+    }),
+
     login: builder.mutation({
       query: (userData) => ({
         url: "/users/login",
@@ -38,5 +47,9 @@ const userApi = createApi({
 });
 
 export default userApi;
-export const { useLoginMutation, useLogoutMutation, useSignupMutation } =
-  userApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useSignupMutation,
+  useGetUserQuery,
+} = userApi;

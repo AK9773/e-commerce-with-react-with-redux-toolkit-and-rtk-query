@@ -3,15 +3,15 @@ import React, { Children } from "react";
 const Button = ({
   children,
   type = "button",
-  bgColor = "bg-blue-600",
   textColor = "text-white",
+  bgColor = "from-blue-500 via-blue-600 to-blue-700",
   className = "",
   ...props
 }) => {
   return (
     <button
       type={type}
-      className={`px-4 mt-2 py-2 rounded-sm ${bgColor} ${textColor} ${className}`}
+      className={`hover:bg-gradient-to-br font-medium rounded-lg text-sm px-4 py-2.5 text-center ${textColor} bg-gradient-to-r ${bgColor} ${className}`}
       {...props}
     >
       {children}

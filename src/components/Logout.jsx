@@ -1,11 +1,13 @@
 import React from "react";
 import Button from "./Button";
-import { useLogoutMutation } from "../features/userApi";
+import { useLogoutMutation } from "../features/api/userApi";
+import { useDispatch } from "react-redux";
 
 const Logout = () => {
   const [logout] = useLogoutMutation();
+  const dispatch = useDispatch();
   const logoutHandle = () => {
-    logout();
+    dispatch(logout());
   };
   return (
     <div>
