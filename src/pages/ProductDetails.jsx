@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductdetailsQuery } from "../features/api/productApi";
-import Loader from "./Loader";
-import AddOrRemoveFromCart from "./AddOrRemoveFromCart";
+import Loader from "../components/Loader";
+import AddOrRemoveFromCart from "../components/AddOrRemoveFromCart";
 import { useSelector } from "react-redux";
-import QuantityUpdate from "./QuantityUpdate";
-import Button from "./Button";
+import QuantityUpdate from "../components/QuantityUpdate";
+import Button from "../components/Button";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

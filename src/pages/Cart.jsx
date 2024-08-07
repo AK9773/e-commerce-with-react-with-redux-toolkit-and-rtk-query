@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import CartItem from "./CartItem";
+import CartItem from "../components/CartItem";
 
 const Cart = () => {
   const userId = localStorage.getItem("userId");
@@ -15,8 +15,8 @@ const Cart = () => {
   }, [carts]);
 
   return (
-    <div className="grid md:grid-cols-3 ">
-      <div className="md:col-span-2">
+    <div className="grid md:grid-cols-5 ">
+      <div className="md:col-span-3">
         {userId ? (
           <>
             {carts?.map((cart) => (
@@ -41,7 +41,7 @@ const Cart = () => {
         )}
       </div>
 
-      <div className="bg-pink-600 md:col-span-1">
+      <div className="bg-pink-300 md:col-span-2">
         <p></p>
         <div></div>
       </div>

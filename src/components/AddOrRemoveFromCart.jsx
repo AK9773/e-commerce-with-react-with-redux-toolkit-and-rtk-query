@@ -36,7 +36,7 @@ const AddOrRemoveFromCart = ({ product }) => {
   const removeCartHandler = async () => {
     if (userId) {
       const filteredCart = cart.filter(
-        (item) => item.productDetails._id === product._id
+        (item) => item.productDetails?._id === product?._id
       );
       await deleteCart(filteredCart[0]._id);
     } else {
@@ -49,7 +49,7 @@ const AddOrRemoveFromCart = ({ product }) => {
     <div>
       {userId ? (
         <>
-          {cart?.some((item) => item.productDetails?._id === product._id) ? (
+          {cart?.some((item) => item.productDetails?._id === product?._id) ? (
             <Button
               bgColor="from-pink-500 via-pink-600 to-pink-700"
               onClick={removeCartHandler}

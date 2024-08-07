@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import ProductCard from "../components/ProductCard";
 import { useGetProductListQuery } from "../features/api/productApi";
-import Loader from "./Loader";
-import Banner from "./Banner";
+import Loader from "../components/Loader";
+import Banner from "../components/Banner";
 
 const Home = () => {
   const { data, error, isLoading, isError } =

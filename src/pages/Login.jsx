@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import { useLoginMutation, useLogoutMutation } from "../features/api/userApi";
 import { Link, useNavigate } from "react-router-dom";
-import Loader from "./Loader";
+import Loader from "../components/Loader";
 import { useDispatch } from "react-redux";
 import { login, setError } from "../features/slice/userSlice";
 import {

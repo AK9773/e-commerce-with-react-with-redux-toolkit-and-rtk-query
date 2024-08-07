@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import { useAddProductMutation } from "../features/api/productApi";
 import { useNavigate } from "react-router-dom";
-import Loader from "./Loader";
+import Loader from "../components/Loader";
 
 const AddProduct = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -24,6 +24,7 @@ const AddProduct = () => {
     }
 
     const response = await addProduct(formData);
+    console.log(response);
 
     if (response.data?.statusCode === 201) {
       reset();

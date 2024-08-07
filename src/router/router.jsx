@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Home from "../components/Home";
-import Login from "../components/Login";
-import ProductDetails from "../components/ProductDetails";
-import AddProduct from "../components/AddProduct";
-import SignUp from "../components/SignUp";
-import Cart from "../components/Cart";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import ProductDetails from "../pages/ProductDetails";
+import AddProduct from "../pages/AddProduct";
+import SignUp from "../pages/SignUp";
+import Cart from "../pages/Cart";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 
 export const router = createBrowserRouter([

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useAddCartMutation,
   useDeleteCartMutation,
@@ -27,13 +27,13 @@ const ProductCard = ({ product }) => {
     <>
       <div className="w-[240px] rounded shadow-lg bg-[#baf7fa] overflow-hidden ">
         <div className="flex justify-center items-center">
-          <a href={`/product/${product?._id}`}>
+          <Link to={`/product/${product?._id}`}>
             <img
               className="h-44 w-40 object-contain p-2 hover:scale-110"
               src={product.thumbnail}
               alt={product.name}
             />
-          </a>
+          </Link>
         </div>
         <div className="font-bold text-xl h-8 overflow-hidden px-4 mb-2">
           {product.name}

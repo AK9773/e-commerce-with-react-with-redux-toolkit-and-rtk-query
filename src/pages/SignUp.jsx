@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../components/Input";
+import Button from "../components/Button";
 import axios from "axios";
 import { useSignupMutation } from "../features/api/userApi";
 import { Link, useNavigate } from "react-router-dom";
