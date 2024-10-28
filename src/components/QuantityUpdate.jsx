@@ -20,7 +20,7 @@ const QuantityUpdate = (props) => {
   };
 
   useEffect(() => {
-    if (props.productId && quantity > 1) {
+    if (props.productId && quantity >= 1) {
       updateProductQuantity(props.productId, quantity);
       dispatch(updateQuantity({ productId: props.productId, quantity }));
     }

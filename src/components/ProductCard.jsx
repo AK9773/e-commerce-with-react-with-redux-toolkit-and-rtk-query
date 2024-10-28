@@ -1,18 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  useAddCartMutation,
-  useDeleteCartMutation,
-} from "../features/api/cartApi";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../features/slice/cartSlice";
-import {
-  addProductToLocalStorage,
-  removeProductFromLocalStorage,
-} from "./productToLocalStorage";
-import { useDeleteProductMutation } from "../features/api/productApi";
-import Loader from "./Loader";
 import AddOrRemoveFromCart from "./AddOrRemoveFromCart";
 
 const ProductCard = ({ product }) => {

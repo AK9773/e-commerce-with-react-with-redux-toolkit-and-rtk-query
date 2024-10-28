@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useLoginMutation, useLogoutMutation } from "../features/api/userApi";
+import { useLoginMutation } from "../features/api/userApi";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useDispatch } from "react-redux";
 import { login, setError } from "../features/slice/userSlice";
-import {
-  cartApi,
-  useGetCartItemsQuery,
-  useInsertManyToCartMutation,
-} from "../features/api/cartApi";
-import { updateCartFromServer } from "../features/slice/cartSlice";
+import { cartApi, useInsertManyToCartMutation } from "../features/api/cartApi";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,25 +23,26 @@ const Login = () => {
     await loginMutation(loginData);
   };
 
+  const loginFunction = async () => {
+    if (data && data.user) {
+      dispatch(login(data.user));
+      if (localStorage.getItem("cartItems")) {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+        await insertMutation(cartItems);
+      }
+      localStorage.removeItem("cartItems");
+      localStorage.setItem("userId", data.user._id);
+      dispatch(cartApi.util.invalidateTags(["Carts"]));
+
+      navigate("/");
+    }
+
+    if (isError) {
+      dispatch(setError(error.data));
+    }
+  };
+
   useEffect(() => {
-    const loginFunction = async () => {
-      if (data && data.user) {
-        dispatch(login(data.user));
-        if (localStorage.getItem("cartItems")) {
-          const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-          await insertMutation(cartItems);
-        }
-        localStorage.removeItem("cartItems");
-        localStorage.setItem("userId", data.user._id);
-        dispatch(cartApi.util.invalidateTags(["Carts"]));
-
-        navigate("/");
-      }
-
-      if (isError) {
-        dispatch(setError(error.data));
-      }
-    };
     loginFunction();
   }, [data, isError]);
 
@@ -55,7 +51,7 @@ const Login = () => {
       {isError && (
         <>
           <div className="text-red-900 text-center">
-            Error: {error.data.message}
+            Error: {error.data?.message}
           </div>
         </>
       )}

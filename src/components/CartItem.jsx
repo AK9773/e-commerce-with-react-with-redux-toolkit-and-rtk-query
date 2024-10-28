@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "./Button";
 import { removeFromCart } from "../features/slice/cartSlice";
 import { removeProductFromLocalStorage } from "./productToLocalStorage";

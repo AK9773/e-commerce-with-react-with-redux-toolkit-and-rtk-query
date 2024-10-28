@@ -1,12 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setError } from "../slice/userSlice";
+import { customFetchBase } from "./baseQueryWithReauth";
 
 const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/v1",
-    credentials: "include",
-  }),
+  baseQuery: customFetchBase,
   tagTypes: ["User"],
 
   endpoints: (builder) => ({

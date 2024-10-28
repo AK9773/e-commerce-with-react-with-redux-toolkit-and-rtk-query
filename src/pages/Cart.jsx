@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
+import CartSummary from "../components/CartSummary";
 
 const Cart = () => {
   const userId = localStorage.getItem("userId");
@@ -41,9 +42,8 @@ const Cart = () => {
         )}
       </div>
 
-      <div className="bg-pink-300 md:col-span-2">
-        <p></p>
-        <div></div>
+      <div className=" md:col-span-2">
+        <CartSummary />
       </div>
     </div>
   );

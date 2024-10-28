@@ -1,11 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { customFetchBase } from "./baseQueryWithReauth";
 
 export const productApi = createApi({
   reducerPath: "productApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/v1",
-    credentials: "include",
-  }),
+  baseQuery: customFetchBase,
 
   tagTypes: ["Products"],
 

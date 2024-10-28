@@ -4,7 +4,6 @@ import { useGetProductdetailsQuery } from "../features/api/productApi";
 import Loader from "../components/Loader";
 import AddOrRemoveFromCart from "../components/AddOrRemoveFromCart";
 import { useSelector } from "react-redux";
-import QuantityUpdate from "../components/QuantityUpdate";
 import Button from "../components/Button";
 import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +14,7 @@ const ProductDetails = () => {
     useGetProductdetailsQuery(productId);
 
   const cart = useSelector((state) => state.cart.cartData);
+  const userData = useSelector((state) => state.cart.userData);
   const [quantity, setQuantity] = useState(1);
   const [index, setIndex] = useState(0);
   const [product, setProduct] = useState(null);
@@ -45,7 +45,28 @@ const ProductDetails = () => {
     }
   };
 
+  // const getProductQuantity = () => {
+  //   if (userData) {
+  //     const filteredArrayOfCart = cart.filter(
+  //       (item) => item.productDetails._id === productId
+  //     );
+  //     if (filteredArrayOfCart.length > 0) {
+  //       return filteredArrayOfCart[0].productDetails.quantity;
+  //     }
+  //   } else {
+  //     const filteredArrayOfLocalCart = cart.filter(
+  //       (item) => item._id === productId
+  //     );
+  //     if (filteredArrayOfLocalCart.length > 0) {
+  //       return filteredArrayOfLocalCart[0].quantity;
+  //     }
+  //   }
+  //   return 1;
+  // };
+
   useEffect(() => {
+    // const quantity = getProductQuantity();
+    // setQuantity(quantity);
     if (data) {
       setProduct({ ...data.product, quantity: quantity });
     }

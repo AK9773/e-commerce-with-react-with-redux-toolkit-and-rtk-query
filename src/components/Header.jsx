@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { cartApi, useGetCartItemsQuery } from "../features/api/cartApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useLogoutMutation } from "../features/api/userApi";
 import { logout } from "../features/slice/userSlice.js";
@@ -29,6 +28,9 @@ const Header = () => {
   const { data, error, isError, isLoading } = useGetProductListQuery(
     `?limit=5&keyword=${inputValue}`
   );
+  const activeLinkCssClass =
+    "font-bold bg-[#43f395] border-[#44FF00] border-2 p-[5px] rounded-[5px] shadow-[3px_3px_10px_3px_#ebe4e4]";
+  const inActiveLinkCssClass = "text-[#001524] hover:text-[#1b393b]";
 
   useEffect(() => {
     if (cart) {
@@ -67,9 +69,7 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive
-                  ? "text-[#4545cb] font-bold"
-                  : "text-[#001524] hover:text-[#1b393b]"
+                isActive ? activeLinkCssClass : inActiveLinkCssClass
               }
             >
               <FontAwesomeIcon icon={faHouse} />
@@ -111,9 +111,7 @@ const Header = () => {
                 <NavLink
                   to="/addProduct"
                   className={({ isActive }) =>
-                    isActive
-                      ? "text-[#4545cb] font-bold"
-                      : "text-[#001524] hover:text-[#1b393b]"
+                    isActive ? activeLinkCssClass : inActiveLinkCssClass
                   }
                 >
                   Add Product
@@ -124,9 +122,9 @@ const Header = () => {
               <NavLink
                 to={cartItem ? "/cart" : "#"}
                 className={({ isActive }) =>
-                  isActive
-                    ? "text-[#4545cb] font-bold"
-                    : "text-[#001524] hover:text-[#1b393b]"
+                  isActive && cartItem
+                    ? activeLinkCssClass
+                    : inActiveLinkCssClass
                 }
               >
                 <FontAwesomeIcon icon={faCartShopping} />
@@ -134,14 +132,7 @@ const Header = () => {
               </NavLink>
             </li>
             {userData ? (
-              <li
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-[#4545cb] font-bold"
-                    : "text-[#001524] hover:text-[#1b393b]"
-                }
-                onClick={logoutHandle}
-              >
+              <li className={inActiveLinkCssClass} onClick={logoutHandle}>
                 Logout
               </li>
             ) : (
@@ -149,9 +140,7 @@ const Header = () => {
                 <NavLink
                   to="/login"
                   className={({ isActive }) =>
-                    isActive
-                      ? "text-[#4545cb] font-bold"
-                      : "text-[#001524] hover:text-[#1b393b]"
+                    isActive ? activeLinkCssClass : inActiveLinkCssClass
                   }
                 >
                   Login
@@ -192,7 +181,12 @@ const Header = () => {
         <div className="md:hidden bg-[#48cae4] py-8">
           <ul className="flex flex-col space-y-2">
             <li className="mx-auto">
-              <NavLink to="/" className="text-[#001524] hover:text-[#e2fdff]">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? activeLinkCssClass : inActiveLinkCssClass
+                }
+              >
                 Home
               </NavLink>
             </li>
@@ -200,7 +194,9 @@ const Header = () => {
               <li className="mx-auto">
                 <NavLink
                   to="/addProduct"
-                  className="text-[#001524] hover:text-[#e2fdff]"
+                  className={({ isActive }) =>
+                    isActive ? activeLinkCssClass : inActiveLinkCssClass
+                  }
                 >
                   Add Product
                 </NavLink>
@@ -209,24 +205,18 @@ const Header = () => {
             <li className="mx-auto">
               <NavLink
                 to={cartItem ? "/cart" : "#"}
-                className="text-[#001524] hover:text-[#e2fdff]"
+                className={({ isActive }) =>
+                  isActive ? activeLinkCssClass : inActiveLinkCssClass
+                }
               >
                 Cart <sup>{cartItem}</sup>
               </NavLink>
             </li>
-            {!userData && (
-              <li className="mx-auto">
-                <NavLink
-                  to="/signup"
-                  className="text-[#001524] hover:text-[#e2fdff]"
-                >
-                  SignUp
-                </NavLink>
-              </li>
-            )}
             {userData ? (
               <li
-                className="mx-auto text-[#001524] hover:text-[#e2fdff] cursor-pointer"
+                className={({ isActive }) =>
+                  isActive ? activeLinkCssClass : inActiveLinkCssClass
+                }
                 onClick={logoutHandle}
               >
                 Logout
@@ -235,7 +225,9 @@ const Header = () => {
               <li className="mx-auto">
                 <NavLink
                   to="/login"
-                  className="text-[#001524] hover:text-[#e2fdff]"
+                  className={({ isActive }) =>
+                    isActive ? activeLinkCssClass : inActiveLinkCssClass
+                  }
                 >
                   Login
                 </NavLink>

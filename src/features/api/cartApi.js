@@ -1,18 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { customFetchBase } from "./baseQueryWithReauth";
 
 export const cartApi = createApi({
   reducerPath: "cartApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/v1/carts",
-    credentials: "include",
-  }),
+  baseQuery: customFetchBase,
 
   tagTypes: ["Carts"],
 
   endpoints: (builder) => ({
     addCart: builder.mutation({
       query: (cart) => ({
-        url: "/addToCart",
+        url: "/carts/addToCart",
         method: "POST",
         body: cart,
       }),
@@ -21,7 +19,7 @@ export const cartApi = createApi({
 
     insertManyToCart: builder.mutation({
       query: (cartItems) => ({
-        url: "/insertManyToCart",
+        url: "/carts/insertManyToCart",
         method: "POST",
         body: cartItems,
       }),
@@ -30,7 +28,7 @@ export const cartApi = createApi({
 
     updateQuantity: builder.mutation({
       query: (cart) => ({
-        url: `/updateQuantity`,
+        url: `/carts/updateQuantity`,
         method: "PATCH",
         body: cart,
       }),
@@ -39,7 +37,7 @@ export const cartApi = createApi({
 
     deleteCart: builder.mutation({
       query: (cartId) => ({
-        url: `/delete/${cartId}`,
+        url: `/carts/delete/${cartId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Carts"],
@@ -47,7 +45,7 @@ export const cartApi = createApi({
 
     getCartItems: builder.query({
       query: () => ({
-        url: "/cartItems",
+        url: "/carts/cartItems",
         method: "GET",
       }),
       providesTags: ["Carts"],

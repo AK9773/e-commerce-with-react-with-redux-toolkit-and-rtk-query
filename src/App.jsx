@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { useGetUserQuery } from "./features/api/userApi";
@@ -10,20 +10,36 @@ import { useGetCartItemsQuery } from "./features/api/cartApi";
 import UpdateUserAndCartDetails from "./components/UpdateUserAndCartDetails";
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userId = localStorage.getItem("userId");
 
-  if (!userId) {
-    const cartItems = localStorage.getItem("cartItems");
-    if (cartItems) {
-      const cart = JSON.parse(cartItems);
-      if (cart && cart.length) {
-        for (const item of cart) {
-          dispatch(addToCart(item));
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      navigate("/login");
+    };
+
+    window.addEventListener("unauthorizedAccess", handleUnauthorized);
+
+    return () => {
+      window.removeEventListener("unauthorizedAccess", handleUnauthorized);
+    };
+  }, [navigate]);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      const cartItems = localStorage.getItem("cartItems");
+      if (cartItems) {
+        const cart = JSON.parse(cartItems);
+        if (cart && cart.length) {
+          for (const item of cart) {
+            dispatch(addToCart(item));
+          }
         }
       }
     }
-  }
+  }, [dispatch]);
 
   return (
     <div>
